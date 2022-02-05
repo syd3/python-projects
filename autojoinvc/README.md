@@ -1,4 +1,4 @@
-# autojoinvc v2
+# autojoinvc
 
 A python script that will automatically join zoom meeting for you based on the configurations you give.
 
