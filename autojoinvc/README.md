@@ -23,29 +23,29 @@ This script is primarily for joining zoom meeting classes. Not meetings that are
 
 ## How to use
 
-1. Clone the repo. 
-2. Add the main.py script from src to PATH or make a symbolic link to a directory included in the PATH like /usr/local/bin and make it executable using chmod.
-3. Run the script either by typing main.py or whatever you named the file on your terminal (if it was added to your PATH) or by running it directly from the repo by typing `python3 main.py`
-4. Enter the proper configuration (png file path and meeting length). The png the script is referring to is the open_link.png file in the buttons dir. It can be found in this repo. Just add the absolute path to that file. And the meeting length should be in minutes. Example, if the meeting is 2 hours, input should be 120, 1 hr = 60 minutes, 2 hrs = 120 minutes.
-5. Add your subject configurations by doing:
+1. Clone the repo.
+2. Install the dependencies via `sudo apt install python3-tk python3-dev && pip install -r requirements.txt`
+3. Navigate to the src/ directory and make main.py executable via `chmod +x main.py`.
+4. Navigate to /usr/local/bin and make a symbolic link via `ln -s /path/to/repo/main.py autojoinvc`
+5. Run the script by typing in `autojoinvc` in the terminal or by directly executing it from the src folder by entering `python3 main.py` or `./main.py` in the terminal.
+6. Enter the proper configurations which are the open_link.png file path and the meeting length. The open_link.png file is located in the buttons/ folder, you can also locate it by using the `locate` command via `locate open_link.png`. And the meeting length is the average meeting length of all your zoom meetings and must be entered in minutes. Example, 1 hr == 60, 1 hr 30 mins == 90, 2 hrs == 120.
+7. Add meeting configurations by using the syntax below:
 ```
-autojoinvc add --subj <subject name here> --time <time here> --day <day here> --link <link here> --status <on/off>
+autojoinvc add --subj <subject name> --time <meeting time> --day <day 0-6> --link <meeting link>
 ```
-The --time option uses military time format. And the --day option refers to a day in the weekday or weekend, and are represented as integers. See additional notes below for more info.
+The `--time` option uses military time format. And the `--day` option refers to a day in the week, and are represented as integers from 0 (monday) through 6 (sunday).
 
-6. Add this command to your startup applications:
-`main.py run`
-The "run" command is an option in the script. Without it, the script will not run and will instead throw the --help prompt.
+Example meeting configuration that will occur on Monday at 12:00 PM:
+```
+autojoinvc add --subj Math --time 12:00:00 --day 0 --link https://<zoom link>.com
+```
 
-7. Wait for the meeting time for the script to execute. Restart your system if the meeting is going to occur the same day you configured this script. (For the script to be executed at startup)
+8. Turn the script on/off by `autojoinvc on` or `autojoinvc off`.
+9. Add `autojoinvc run` command to the startup applications. The `run` option tells the script that you want to execute its main functionality, without it, it'll throw the --help prompt.
+10. Wait until the day of the meeting. Restart your computer if the meeting is going to occur the same day you configured this script.
 
 For more options, use the --help option to see the available commands.
 
 ## Additional notes
 
-The requirements.txt file contains all the dependencies needed in order to run the code in the src dir. However, it's not needed to install the dependencies if you're not gonna change anything in the src code.
-
-In the script config, when adding subjects. Days are represented as integers. Mon - 0, Tues - 1, Wed - 2, Thurs - 3, Fri - 4, Sat - 5, Sun - 6
-
-In order for the script to execute properly, you first must install `python3-tk` & `python3-dev`. You can do so by running the below command:
-`sudo apt install python3-tk python3-dev`
+When adding subjects. Days are represented as integers. Mon - 0, Tues - 1, Wed - 2, Thurs - 3, Fri - 4, Sat - 5, Sun - 6
